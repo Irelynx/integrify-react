@@ -1,44 +1,44 @@
-import { Country } from "./types";
+import { Country } from './types';
 
 /**
  * Documentation: https://restcountries.com/
  * version: 3.1
  */
 class API {
-    static version = "v3.1";
-    static apiBase = "https://restcountries.com";
-    static root = new URL(this.apiBase + "/" + this.version);
-    
-    async getJSON<T>(url: URL | string) {
-        const response = await fetch(url, {
-            headers: {
-                "Accept": "application/json",
-            },
-        });
+  static version = 'v3.1';
+  static apiBase = 'https://restcountries.com';
+  static root = new URL(this.apiBase + '/' + this.version);
 
-        let body: T | null = null;
-        if (response.headers.get('content-type')?.includes('json')) {
-            body = await response.json().catch(e => null);
-        }
+  async getJSON<T>(url: URL | string) {
+    const response = await fetch(url, {
+      headers: {
+        Accept: 'application/json',
+      },
+    });
 
-        return {
-            ok: response.ok,
-            statusCode: response.status,
-            body,
-            response,
-        };
+    let body: T | null = null;
+    if (response.headers.get('content-type')?.includes('json')) {
+      body = await response.json().catch((_) => null);
     }
 
-    async getAll() {
-        const url = new URL('all', API.root);
-        const response = await this.getJSON<Country[]>(url);
+    return {
+      ok: response.ok,
+      statusCode: response.status,
+      body,
+      response,
+    };
+  }
 
-        if (response.body instanceof Array) {
-            return response.body;
-        } else {
-            return [];
-        }
+  async getAll() {
+    const url = new URL('all', API.root);
+    const response = await this.getJSON<Country[]>(url);
+
+    if (response.body instanceof Array) {
+      return response.body;
+    } else {
+      return [];
     }
+  }
 }
 
 const api = new API();
