@@ -10,17 +10,51 @@ import {
 import { useContext, useState } from 'react';
 import { Context } from '~/contexts/app';
 
+import ChevronRight from '@mui/icons-material/ChevronRight';
+import { useNavigate } from 'react-router-dom';
+
 export default function Countries() {
   const { filteredCountries } = useContext(Context);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const headers = [{ name: 'Name', path: 'name.common' }];
+
+  const navigate = useNavigate();
+
+  const headers: Array<{
+    name: string;
+    template: (country: Exclude<typeof filteredCountries, null>[number]) => React.ReactNode;
+  }> = [
+    {
+      name: 'Flag',
+      template: (country) => (
+        <div style={{ textAlign: 'center' }}>
+          <img height={60} src={country.flags.svg} alt={country.flags.alt || ''} />
+        </div>
+      ),
+    },
+    { name: 'Name', template: (country) => <>{country.name.common}</> },
+    { name: 'Region', template: (country) => <>{country.region}</> },
+    { name: 'Population', template: (country) => <>{country.population}</> },
+    {
+      name: 'Languages',
+      template: (country) =>
+        country.languages ? (
+          <ul>
+            {Object.keys(country.languages).map((lang) => (
+              <li key={lang}>{country.languages![lang]}</li>
+            ))}
+          </ul>
+        ) : (
+          ''
+        ),
+    },
+  ];
 
   function handleRowClick(
     event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
     row: Exclude<typeof filteredCountries, null>[number],
   ) {
-    // event, row;
+    navigate(`country/${row.cca3}`);
   }
 
   function handleSetPage(
@@ -44,6 +78,7 @@ export default function Countries() {
               {headers.map((header, index) => (
                 <TableCell key={index}>{header.name}</TableCell>
               ))}
+              <TableCell></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -52,13 +87,21 @@ export default function Countries() {
               .map((country) => (
                 <TableRow
                   hover
+                  style={{ cursor: 'pointer' }}
                   key={country.cca3}
                   onClick={(event) => handleRowClick(event, country)}
                 >
-                  <TableCell component='th' scope='row'>
-                    {country.name.official}
+                  {headers.map((header, index) => {
+                    return (
+                      <TableCell component='th' scope='row' key={index}>
+                        {header.template(country)}
+                      </TableCell>
+                    );
+                  })}
+
+                  <TableCell>
+                    <ChevronRight />
                   </TableCell>
-                  <TableCell></TableCell>
                 </TableRow>
               ))}
           </TableBody>
