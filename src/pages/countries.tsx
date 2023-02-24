@@ -51,7 +51,7 @@ export default function Countries() {
   ];
 
   function handleRowClick(
-    event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
+    _event: React.MouseEvent<HTMLTableRowElement, MouseEvent>,
     row: Exclude<typeof filteredCountries, null>[number],
   ) {
     navigate(`country/${row.cca3}`);

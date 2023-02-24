@@ -58,7 +58,7 @@ export default function Header() {
   useEffect(() => {
     console.log(debouncedQuery);
     setQuery(debouncedQuery);
-  }, [debouncedQuery]);
+  }, [debouncedQuery, setQuery]);
 
   return (
     <>
