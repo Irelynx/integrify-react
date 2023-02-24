@@ -15,7 +15,7 @@
 ### Assignment requirements
 
 * [x] Create a home page (component) that displays the country data and it should look similar to **Image 1.**
-* [ ] When you click on the button, it should navigate to another page showing detailed information about that country as **Image 2**. The URL for country detail will look like this: [https://restcountries.com/v3.1/name/{name](https://restcountries.com/v3.1/name/%7Bname)}
+* [x] When you click on the button, it should navigate to another page showing detailed information about that country as **Image 2**. The URL for country detail will look like this: [https://restcountries.com/v3.1/name/{name](https://restcountries.com/v3.1/name/%7Bname)}
 * [x] Create a search field that allows users to search country by country name.
 * [x] When displaying country data, please add the pagination or lazy loading to only show 5 countries as in **Image 1**.
 * [x] Make use of the following react concepts:
