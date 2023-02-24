@@ -1,5 +1,5 @@
 // import reactLogo from './assets/react.svg';
-import './App.css';
+// import './App.css';
 import { AppContextDOM } from './contexts/app';
 import Router from './router';
 
