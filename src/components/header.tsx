@@ -7,6 +7,7 @@ import { AppBar, Box, Toolbar, IconButton, Typography, InputBase } from '@mui/ma
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { useDebounce } from '~/utils';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -80,7 +81,9 @@ export default function Header() {
               component='div'
               sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
             >
-              Countries
+              <Link to={'/'} className='link-reset'>
+                Countries
+              </Link>
             </Typography>
             <Search>
               <SearchIconWrapper>

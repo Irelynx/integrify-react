@@ -4,6 +4,11 @@ body {
   min-height: 100vh;
 }
 
+.link-reset {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 /*
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
