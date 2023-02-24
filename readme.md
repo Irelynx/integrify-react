@@ -22,7 +22,7 @@
     - Use Functional React Component
     - React hooks: `useState`, `useEfect`, `useParams`
 * [x] You can use Bootstrap, Vanilla CSS, or any other framework you wish for styling
-* [ ] After finishing the task, push the code to a public repository on GitHub and deploy it to Netlify, Vercel, or any other static website hosting alternatives. When submitting the assignment, provide us with both links i.e. the link to the GitHub repository and the link to the deployed application.
+* [x] After finishing the task, push the code to a public repository on GitHub and deploy it to Netlify, Vercel, or any other static website hosting alternatives. When submitting the assignment, provide us with both links i.e. the link to the GitHub repository and the link to the deployed application.
 
 ### Extra points
 
