@@ -1,11 +1,10 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import MainLayout from '~/layouts/main';
 import Countries from '~/pages/countries';
 import Country from '~/pages/country';
 import Error from '~/pages/error';
-import { basepath } from '~/settings';
 
-export const router = createBrowserRouter(
+export const router = createHashRouter(
   [
     {
       path: '/',
@@ -24,7 +23,7 @@ export const router = createBrowserRouter(
     },
   ],
   {
-    basename: basepath,
+    // basename: basePath,
   },
 );
 
