@@ -12,10 +12,10 @@ class API {
   useCache = true;
   cacheName = 'restcountries.com/v3.1';
 
-  async getJSON<T>(url: URL | string | RequestInfo) {
+  async getJSON<T>(url: URL | string | RequestInfo, force = false) {
     let response: Response;
     if (this.useCache) {
-      response = await this.getCachedResource(url, this.cacheName, {});
+      response = await this.getCachedResource(url, this.cacheName, {}, force);
     } else {
       response = await fetch(url, {
         headers: {
@@ -41,10 +41,14 @@ class API {
     url: string | URL | RequestInfo,
     cacheName: string,
     searchOptions: CacheQueryOptions,
+    force = false,
   ) {
     const cache = await caches.open(cacheName);
-    let response = await cache.match(url, searchOptions);
-    if (response) return response;
+    let response: Response | undefined;
+    if (!force) {
+      response = await cache.match(url, searchOptions);
+      if (response) return response;
+    }
 
     // get resource and store it
     response = await fetch(url);
@@ -52,9 +56,9 @@ class API {
     return response;
   }
 
-  async getAll() {
+  async getAll(force = false) {
     const url = new URL(`/${API.version}/all`, API.root);
-    const response = await this.getJSON<Country[]>(url);
+    const response = await this.getJSON<Country[]>(url, force);
 
     if (response.body instanceof Array) {
       return response.body;
