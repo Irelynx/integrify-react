@@ -1,4 +1,7 @@
-import { ChevronLeft, ExpandMore, ExpandLess, Place } from '@mui/icons-material';
+import ChevronLeft from '@mui/icons-material/ChevronLeft';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import Place from '@mui/icons-material/Place';
 import {
   Avatar,
   Card,
