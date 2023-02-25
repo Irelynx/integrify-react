@@ -41,7 +41,7 @@ You'll gain extra bonus points and appreciation by having the following:
 * [x] Redux (use Redux, Redux Toolkit, or Context API for managing state)
   > React Context API
 * [ ] Testing (Front end Testing: Testing-library/react, Cypress, Jest or any other framework/library)
-  > TODO: vitest
+  > TODO: vitest (you can see the progress in [`testing`](https://github.com/Irelynx/integrify-react/tree/testing) branch)
 * [x] Sorting by country name
   > Also by Region and Population (configurable)
 ## Also done
