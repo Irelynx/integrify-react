@@ -42,9 +42,8 @@ You'll gain extra bonus points and appreciation by having the following:
   > React Context API
 * [ ] Testing (Front end Testing: Testing-library/react, Cypress, Jest or any other framework/library)
   > TODO: vitest
-* [ ] Sorting by country name
-  > TODO
-
+* [x] Sorting by country name
+  > Also by Region and Population (configurable)
 ## Also done
 
 * Custom error page
