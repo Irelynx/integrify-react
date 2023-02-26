@@ -9,6 +9,14 @@ body {
   text-decoration: inherit;
 }
 
+.alerts-container {
+  position: absolute;
+  top: 5rem;
+  right: 1rem;
+  min-width: 20rem;
+  width: 5vw;
+}
+
 /*
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
