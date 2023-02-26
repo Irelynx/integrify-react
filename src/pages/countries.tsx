@@ -15,7 +15,7 @@ import ChevronRight from '@mui/icons-material/ChevronRight';
 import { useNavigate } from 'react-router-dom';
 
 export default function Countries() {
-  const { filteredCountries, message, countries } = useContext(Context);
+  const { filteredCountries, countries } = useContext(Context);
 
   type Country = Exclude<typeof filteredCountries, null>[number];
   type SortOrder = 'asc' | 'desc';
@@ -32,6 +32,8 @@ export default function Countries() {
   const [order, setOrder] = useState<SortOrder>('asc');
   const [sortedCountries, setSortedCountries] =
     useState<typeof filteredCountries>(filteredCountries);
+
+  const formatter = new Intl.NumberFormat('en', { notation: 'compact' });
 
   useEffect(() => {
     console.log('sort', orderBy, !!orderBy?.sortComparator, order);
@@ -101,7 +103,7 @@ export default function Countries() {
           return 0;
         };
       },
-      template: (country) => <>{country.population}</>,
+      template: (country) => <>{formatter.format(country.population)}</>,
     },
     {
       name: 'Languages',
