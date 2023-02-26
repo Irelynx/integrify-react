@@ -53,7 +53,12 @@ export default function Countries() {
       name: 'Flag',
       template: (country) => (
         <div style={{ textAlign: 'center' }}>
-          <img height={60} src={country.flags.svg} alt={country.flags.alt || ''} />
+          <img
+            height={60}
+            src={country.flags.svg}
+            alt={country.flags.alt || ''}
+            className='country-image'
+          />
         </div>
       ),
     },

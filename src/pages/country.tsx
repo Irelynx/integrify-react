@@ -62,6 +62,7 @@ export default function Country() {
               height='194'
               image={country.flags.svg}
               alt={country.flags.alt || country.name.official}
+              className='country-image'
             />
             <CardContent>
               <Typography paragraph variant='body2' color='text.primary'>

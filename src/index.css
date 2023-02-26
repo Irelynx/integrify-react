@@ -17,6 +17,10 @@ body {
   width: 5vw;
 }
 
+.country-image {
+  border: 1px solid #eee;
+}
+
 /*
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
