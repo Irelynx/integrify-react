@@ -46,7 +46,7 @@ export function AppContextDOM({ children }: { children: React.ReactNode }) {
       if (e instanceof APIError) {
         setMessage(e.message);
       } else if (e instanceof Error) {
-        setMessage(e.message);
+        setMessage(`${e.name}: ${e.message}`);
       }
       setCountries(null);
     }
