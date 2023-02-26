@@ -49,6 +49,8 @@ export class API {
     response = await fetch(url);
     if (window.CacheStorage && cache && this.useCache) {
       await cache.put(url, response);
+      // cache.put(url, response) automatically reads response body, and because of that behavior #1 (`Bug: on first load countries list is empty`) happens
+      response = (await cache.match(url, searchOptions)) || response;
     }
     return response;
   }
