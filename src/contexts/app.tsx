@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import api from '~/api';
+import api, { APIError } from '~/api';
 import { Country } from '~/api/types';
 
 export interface AppContext {
@@ -9,6 +9,8 @@ export interface AppContext {
   setFilteredCountries: React.Dispatch<React.SetStateAction<AppContext['filteredCountries']>>;
   query: string;
   setQuery: React.Dispatch<React.SetStateAction<AppContext['query']>>;
+  message: string;
+  setMessage: React.Dispatch<React.SetStateAction<AppContext['message']>>;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -21,15 +23,33 @@ export const Context = React.createContext<AppContext>({
   setFilteredCountries: mockFunction,
   query: '',
   setQuery: mockFunction,
+  message: '',
+  setMessage: mockFunction,
 });
 
 export function AppContextDOM({ children }: { children: React.ReactNode }) {
   const [countries, setCountries] = useState<AppContext['countries']>([]);
   const [filteredCountries, setFilteredCountries] = useState<AppContext['filteredCountries']>([]);
   const [query, setQuery] = useState<AppContext['query']>('');
+  const [message, setMessage] = useState('');
 
   async function reload(force = false) {
-    setCountries(await api.getAll(force));
+    try {
+      const data = await api.getAll(force);
+      if (data.length === 0) {
+        setMessage('Data is not available');
+      } else {
+        setMessage('');
+      }
+      setCountries(data);
+    } catch (e) {
+      if (e instanceof APIError) {
+        setMessage(e.message);
+      } else if (e instanceof Error) {
+        setMessage(e.message);
+      }
+      setCountries(null);
+    }
   }
 
   useEffect(() => {
@@ -66,6 +86,8 @@ export function AppContextDOM({ children }: { children: React.ReactNode }) {
         setFilteredCountries,
         query,
         setQuery,
+        message,
+        setMessage,
       }}
     >
       {children}

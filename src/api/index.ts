@@ -1,5 +1,14 @@
 import { Country } from './types';
 
+export class APIError extends Error {
+  declare response: Awaited<ReturnType<API['getJSON']>>;
+
+  constructor(message: string, response: any) {
+    super(message);
+    this.response = response;
+  }
+}
+
 /**
  * Documentation: https://restcountries.com/
  * version: 3.1
@@ -59,10 +68,17 @@ export class API {
     const url = new URL(`/${API.version}/all`, API.root);
     const response = await this.getJSON<Country[]>(url, force);
 
-    if (response.body instanceof Array) {
-      return response.body;
+    if (response.ok) {
+      if (response.body instanceof Array) {
+        return response.body;
+      } else {
+        return [];
+      }
     } else {
-      return [];
+      throw new APIError(
+        `Failed to call "getAll" method - Internal API Error (${response.statusCode})`,
+        response,
+      );
     }
   }
 }
