@@ -15,7 +15,7 @@ import ChevronRight from '@mui/icons-material/ChevronRight';
 import { useNavigate } from 'react-router-dom';
 
 export default function Countries() {
-  const { filteredCountries } = useContext(Context);
+  const { filteredCountries, message, countries } = useContext(Context);
 
   type Country = Exclude<typeof filteredCountries, null>[number];
   type SortOrder = 'asc' | 'desc';
@@ -175,26 +175,36 @@ export default function Countries() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {sortedCountries?.slice(page * rowsPerPage, (page + 1) * rowsPerPage).map((country) => (
-              <TableRow
-                hover
-                style={{ cursor: 'pointer' }}
-                key={country.cca3}
-                onClick={(event) => handleRowClick(event, country)}
-              >
-                {headers.map((header, index) => {
-                  return (
-                    <TableCell component='th' scope='row' key={index}>
-                      {header.template(country)}
-                    </TableCell>
-                  );
-                })}
+            {sortedCountries?.length ? (
+              sortedCountries
+                ?.slice(page * rowsPerPage, (page + 1) * rowsPerPage)
+                .map((country) => (
+                  <TableRow
+                    hover
+                    style={{ cursor: 'pointer' }}
+                    key={country.cca3}
+                    onClick={(event) => handleRowClick(event, country)}
+                  >
+                    {headers.map((header, index) => {
+                      return (
+                        <TableCell component='th' scope='row' key={index}>
+                          {header.template(country)}
+                        </TableCell>
+                      );
+                    })}
 
-                <TableCell>
-                  <ChevronRight />
+                    <TableCell>
+                      <ChevronRight />
+                    </TableCell>
+                  </TableRow>
+                ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={headers.length + 1}>
+                  {countries?.length ? 'Nothing to show' : 'Loading...'}
                 </TableCell>
               </TableRow>
-            ))}
+            )}
           </TableBody>
         </Table>
       </TableContainer>
