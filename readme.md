@@ -1,5 +1,7 @@
 # Country application (Integrify React assignment task)
 
+> [Project preview link (GitHub pages)](https://irelynx.github.io/integrify-react)
+
 ## Used technologies
 
 * [React](https://reactjs.org)
